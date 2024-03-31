@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="WpfApp1.Views.ToDoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp1.Views"
+             mc:Ignorable="d" FontSize="20" Height="436" Width="1024">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <TextBlock Grid.Row ="2" HorizontalAlignment="Left"  FontSize="30" Margin="272,327,0,-79" Width="183" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock  HorizontalAlignment="Left" Text="TODO LIST APPLICATION" FontSize="30" FontFamily="Times New Roman"/>
+
+        <TextBlock Grid.Row ="0" HorizontalAlignment="Right" Text="{Binding Title}" FontSize="30" FontFamily="Times New Roman"/>
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+
+            <TextBlock Text="Todo Title" Margin="5"/>
+            <TextBox Text="{Binding TodoTitle,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="169" Margin="5" VerticalAlignment="Top" Height="69"/>
+            <TextBlock Text="Todo Description" Margin="5"/>
+            <TextBox Text="{Binding TodoDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="361" Height="74" VerticalAlignment="Top" Margin="5" />
+            <Button Content="Add" Command="{Binding AddCommand}" Height="77" RenderTransformOrigin="0.736,-5.377" Width="215" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}" FontSize="36" FontFamily="Times New Roman"/>
+        </StackPanel>
+        <DataGrid ItemsSource="{Binding TodoModels, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,82,0,82" Grid.Row="2">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Header="Is Done" Binding="{Binding IsDone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
